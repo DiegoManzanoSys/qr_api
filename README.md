@@ -1,5 +1,14 @@
 # API de Escáner de QR
 
+## Notas importantes
+
+- Al no contar con un server, todo se guarda en memoria local, por lo que cuando se baje el servidor, toda la info se perderá
+
+- Siguiendo las instrucciones, toda petición debe tener al menos un header 
+
+  - Accept: application/json
+  - Content-type: application/json;encoding=utf-8
+
 ## Instalación
 
 1. Clonar el repo o bajar el zip (no se cómo lo voy a mandar)
@@ -33,3 +42,4 @@ El servidor corre en `http://localhost:3000`
   "type": "qr"
 }
 ```
+

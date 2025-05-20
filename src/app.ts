@@ -15,6 +15,7 @@ app.use((req: Request, res: Response, next: NextFunction) => {
   const contentType = req.headers['content-type'];
   const acceptHeader = req.headers['accept'];
   
+  // Para POST y PUT, el Content-Type debe ser application/json (con o sin encoding=utf-8)
   if ((req.path.startsWith('/codigos') && (req.method === 'POST' || req.method === 'PUT'))) {
     if (!contentType || !contentType.includes('application/json')) {
       return res.status(415).json({ 
@@ -24,11 +25,15 @@ app.use((req: Request, res: Response, next: NextFunction) => {
     }
   }
   
+  // Para todas las rutas /codigos, acepta peticiones si tienen al menos uno de los dos headers
   if (req.path.startsWith('/codigos')) {
-    if (!acceptHeader || !acceptHeader.includes('application/json')) {
+    const hasValidContentType = contentType && contentType.includes('application/json');
+    const hasValidAccept = acceptHeader && acceptHeader.includes('application/json');
+    
+    if (!hasValidContentType && !hasValidAccept) {
       return res.status(406).json({ 
         error: 'No Aceptable',
-        message: 'El encabezado Accept debe incluir application/json'
+        message: 'La petición debe incluir al menos uno de estos encabezados: Accept: application/json o Content-Type: application/json;encoding=utf-8'
       } as ErrorResponse);
     }
   }

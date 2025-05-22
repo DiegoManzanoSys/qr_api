@@ -3,9 +3,21 @@ import morgan from 'morgan';
 import cors from 'cors';
 import codigosRoutes from './routes/codigosRoutes';
 import { ErrorResponse } from './types';
+import { initializeDatabase } from './database/db';
 
 const app = express();
 const PORT = process.env.PORT || 3000;
+
+// Inicializar la base de datos al arrancar
+(async () => {
+  try {
+    await initializeDatabase();
+    console.log('Base de datos inicializada correctamente');
+  } catch (error) {
+    console.error('Error al inicializar la base de datos:', error);
+    process.exit(1);
+  }
+})();
 
 app.use(cors());
 app.use(morgan('dev'));

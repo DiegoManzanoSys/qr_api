@@ -4,7 +4,7 @@
 
 - La aplicación ahora usa SQLite como base de datos local, lo que permite que los datos persistan entre reinicios.
 - La base de datos se guarda en el archivo `qr_scanner.db` en la raíz del proyecto.
-- Siguiendo las instrucciones, toda petición debe tener al menos un header:
+- Toda petición debe tener al menos un header:
   - Accept: application/json
   - Content-type: application/json;encoding=utf-8
 
